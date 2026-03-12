@@ -1,0 +1,29 @@
+// Generate a simple tray icon as PNG using canvas-like approach
+// Creates a 64x64 icon with "IC" text on a blue gradient circle
+
+const fs = require('fs');
+
+// We'll create the icon as an SVG and convert inline in main.js
+// For now, create an SVG icon file
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d6dff"/>
+      <stop offset="100%" stop-color="#1a3fa0"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+  <rect width="256" height="256" rx="56" fill="url(#inner)"/>
+  <rect x="48" y="56" width="8" height="80" rx="4" fill="white"/>
+  <rect x="48" y="148" width="8" height="8" rx="4" fill="#00d4ff"/>
+  <path d="M80 56 h56 a40 40 0 0 1 0 80 h-20 l32 56 h-20 l-32-56 h-8 v56 h-8 z M88 64 v64 h48 a32 32 0 0 0 0-64 z" fill="white" opacity="0.95"/>
+  <circle cx="200" cy="200" r="36" fill="#00d4ff" opacity="0.9"/>
+  <path d="M188 200 l8 8 l16-16" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>`;
+
+fs.writeFileSync(__dirname + '/icon.svg', svg);
+console.log('Icon SVG created');
